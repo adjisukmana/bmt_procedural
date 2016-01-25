@@ -1,0 +1,16 @@
+======== [ CREDIT ] =========
+Finish :
+1. pegawai
+2. nasabah
+3. tambah_nasabah
+4. edit_nasabah
+5. hapus_data_anggota
+6. c45
+7. perhitungan_c45
+8. pohon_keputusan
+9. prediksi
+10. tambah_prediksi
+
+LOG :
+	change dbminingx.variabel to dbminingx.rule_variabel
+	change code in miningPrePruningC45.php

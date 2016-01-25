@@ -1,0 +1,174 @@
+<?php
+
+"SELECT
+     n.id_nasabah, count(*) as jumlah_kelancaran
+	 FROM nasabah n 
+	 JOIN nasabah_variable nv ON n.id_nasabah = nv.id_nasabah
+	 JOIN variable v ON v.id_variable = nv.id_variable
+     WHERE n.kelancaran is not null 
+     AND
+     (
+     (v.nama_variable = 'pinjaman' AND nv.value = 'sedang') OR
+     ( v.nama_variable = 'pekerjaan' AND nv.value = 'pedagang')
+     )
+     group by n.id_nasabah
+     having jumlah_kelancaran > 1"
+
+
+"SELECT count(*) as jumlah_kelancaran FROM data_anggota WHERE kelancaran is not null
+ 
+								AND pinjaman = 'sedang'
+								AND pekerjaan = 'pedagang'
+
+===
+
+
+
+
+     (
+     (v.nama_variable = 'pinjaman' AND nv.value = 'sedang') OR
+     ( v.nama_variable = 'pekerjaan' AND nv.value = 'pedagang')
+     )
+     group by n.id_nasabah
+     having jumlah_kelancaran > 2
+
+
+
+SELECT
+     n.id_nasabah, count(*) as jum
+	 FROM nasabah n 
+	 JOIN nasabah_variable nv ON n.id_nasabah = nv.id_nasabah
+	 JOIN variable v ON v.id_variable = nv.id_variable
+     WHERE n.kelancaran is not null
+     group by n.id_nasabah
+     having jum > 2
+
+
+
+SELECT *
+								FROM data_anggota WHERE kelancaran = 'Tidak' 
+								AND kelancaran is not null 
+								AND pinjaman = 'sedang'
+								AND pekerjaan = 'pedagang'
+								AND status_rumah = 'sewa'
+
+SELECT *
+	 FROM nasabah n 
+	 JOIN nasabah_variable nv ON n.id_nasabah = nv.id_nasabah
+	 JOIN variable v ON v.id_variable = nv.id_variable
+     WHERE
+     n.kelancaran = 'Tidak'  AND n.kelancaran is not null AND
+     (
+     (v.nama_variable = 'pinjaman' AND nv.value = 'sedang') OR
+     ( v.nama_variable = 'pekerjaan' AND nv.value = 'pedagang')OR
+     ( v.nama_variable = 'status_rumah' AND nv.value = 'sewa')
+     )
+
+====
+
+                $kondisi1 = "$getVariabel = '$getNilaiVariabel'
+                $kondisi1Dynamic = "(v.nama_variable = '$getVariabel' AND nv.value = '$getNilaiVariabel')";
+====
+
+
+
+"
+===============================================================================
+
+$sqlJumlahKasusYa = mysql_query("SELECT *
+								FROM data_anggota WHERE kelancaran = 'Ya' 
+								AND kelancaran is not null 
+								AND pinjaman = 'sedang'
+								AND pekerjaan = 'pedagang'
+								AND status_rumah = 'sewa'");
+
+
+SELECT
+     n.id_nasabah, count(*) as jum
+	 FROM nasabah n 
+	 JOIN nasabah_variable nv ON n.id_nasabah = nv.id_nasabah
+	 JOIN variable v ON v.id_variable = nv.id_variable
+     WHERE
+     n.kelancaran = 'Ya'  AND n.kelancaran is not null AND
+     (
+     (v.nama_variable = 'pinjaman' AND nv.value = 'sedang') OR
+     ( v.nama_variable = 'pekerjaan' AND nv.value = 'pedagang')OR
+     ( v.nama_variable = 'status_rumah' AND nv.value = 'sewa')
+     )
+     group by n.id_nasabah
+     having jum > 2
+
+SELECT
+     n.id_nasabah, count(*) as jum
+	 FROM nasabah n 
+	 JOIN nasabah_variable nv ON n.id_nasabah = nv.id_nasabah
+	 JOIN variable v ON v.id_variable = nv.id_variable
+     WHERE
+     n.kelancaran = 'Ya'  AND n.kelancaran is not null AND( true )
+
+     group by n.id_nasabah
+
+
+     having jum > 2
+
+
+
+
+(v.nama_variable = ~pinjaman~ AND nv.value = ~sedang~) OR 
+( v.nama_variable = ~pekerjaan~ AND nv.value = ~pedagang~) OR 
+( v.nama_variable = ~status_rumah~ AND nv.value = ~pribadi~)
+
+
+
+
+"SELECT n.id_nasabah, 
+										n.nama_nasabah, 
+										v.nama_variable, 
+										nv.value, 
+										n.kelancaran  
+								 FROM nasabah (v.nama_variable = ~pinjaman~ AND nv.value = ~sedang~) OR ( v.nama_variable = ~pekerjaan~ AND nv.value = ~pedagang~) OR ( v.nama_variable = ~status_rumah~ AND nv.value = ~pribadi~)n 
+								 JOIN nasabah_variable nv ON n.id_nasabah = nv.id_nasabah
+								 JOIN variable v ON v.id_variable = nv.id_variable
+                                 WHERE
+                                 n.kelancaran = 'Ya'  AND n.kelancaran is not null AND
+                                 ((v.nama_variable = 'pinjaman' AND nv.value = 'rendah') OR
+                                 ( v.nama_variable = 'pekerjaan' AND nv.value = 'swasta'))
+                                 having count(distinct n.id_nasabah) > 1
+                                
+                                 
+                                 ";
+
+
+
+$sqlJumlahKasusYa = mysql_query("SELECT COUNT(*) as jumlah_ya 
+								FROM data_anggota WHERE kelancaran = 'Ya' 
+								AND kelancaran is not null 
+								AND pinjaman = 'rendah'
+								AND pekerjaan = 'swasta'");
+
+
+
+=========================================================================================================
+$sqlJumlahKasusYa = mysql_query("SELECT n.id_nasabah, 
+										n.nama_nasabah, 
+										v.nama_variable, 
+										nv.value, 
+										n.kelancaran  
+								 FROM nasabah n 
+								 JOIN nasabah_variable nv ON n.id_nasabah = nv.id_nasabah
+								 JOIN variable v ON v.id_variable = nv.id_variable");
+
+
+
+$sqlJumlahKasusYa = mysql_query("SELECT COUNT(*) as jumlah_ya 
+								FROM data_anggota WHERE kelancaran = 'Ya' 
+								AND kelancaran is not null 
+								AND pinjaman = 'rendah'
+								AND pekerjaan = 'swasta'");
+
+$sqlJumlahKasusYa = mysql_query("SELECT COUNT(*) as jumlah_ya 
+								FROM data_anggota WHERE kelancaran = 'Ya' 
+								AND kelancaran is not null 
+								$kondisiVariabel");
+$rowJumlahKasusYa = mysql_fetch_array($sqlJumlahKasusYa);
+$getJumlahKasusYa = $rowJumlahKasusYa['jumlah_ya'];

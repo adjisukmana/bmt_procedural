@@ -1,0 +1,134 @@
+/*
+ * jQuery Dynatable plugin 0.3.1
+ *
+ * Copyright (c) 2014 Steve Schwartz (JangoSteve)
+ *
+ * Dual licensed under the AGPL and Proprietary licenses:
+ *   http://www.dynatable.com/license/
+ *
+ * Date: Tue Jan 02 2014
+ */
+th a {
+  color: #333;
+}
+th a:hover {
+  color: #333;
+  text-decoration: underline;
+}
+
+.dynatable-search {
+  float: right;
+  margin-bottom: 10px;
+  padding: 0 25px 10px;
+}
+
+.dynatable-pagination-links {
+  float: right;
+  padding: 0 25px 10px;
+  clear: both;
+}
+
+.dynatable-record-count {
+  display: block;
+  padding: 5px 0;
+  padding: 0 25px 10px;
+}
+
+.dynatable-pagination-links li {
+	margin: 0 2px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+/*.dynatable-pagination-links li:before, .dynatable-pagination-links span:before {
+	left: 0;
+    top: 0;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-transform: scale3d(0, 0, 0);
+    -moz-transform: scale3d(0, 0, 0);
+    -ms-transform: scale3d(0, 0, 0);
+    -o-transform: scale3d(0, 0, 0);
+    transform: scale3d(0, 0, 0);
+    -webkit-transition: all;
+    -o-transition: all;
+    transition: all;
+    -webkit-transition-duration: 250ms;
+    transition-duration: 250ms;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 0;
+    border-radius: 50%;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}*/
+.dynatable-pagination-links span,
+.dynatable-pagination-links li {
+    border-radius: 50% !important;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 14px;
+    z-index: 1;
+    position: relative;
+}
+
+.dynatable-page-link,
+.dynatable-page-break {
+  display: block;
+  padding: 5px 7px;
+}
+
+.dynatable-page-link {
+  cursor: pointer;
+}
+
+.dynatable-active-page,
+.dynatable-disabled-page {
+  cursor: text;
+}
+.dynatable-active-page:hover,
+.dynatable-disabled-page:hover {
+  text-decoration: none;
+}
+
+.dynatable-active-page {
+    z-index: 2;
+    color: #ffffff;
+    background-color: #00bcd4;
+    border-color: #ffffff;
+    cursor: default;
+    border-radius: 50% !important;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+    font-size: 14px;
+    position: relative;
+}
+.dynatable-active-page:hover {
+  color: #fff;
+}
+.dynatable-disabled-page,
+.dynatable-disabled-page:hover {
+  background: none;
+  color: #999;
+}
+
+.dynatable-per-page {
+  padding: 0 25px 10px;
+}
+
+.search {
+	display: inline-flex;
+}
+
+
+

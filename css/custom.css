@@ -1,0 +1,162 @@
+
+/*dynatables*/
+#header {
+	background: #2196F3;
+}
+
+body.login-content:before {
+	background: #9b6bcc;
+}
+
+.card-header .header-login {
+	text-align: left;
+}
+
+.card-header .header-login h2 {
+    line-height: 100%;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+
+.card-header .header-login small {
+    display: block;
+    margin-top: 8px;
+    color: #AEAEAE;
+    line-height: 160%;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: left;
+}
+
+.login-content .lc-block .btn-login {
+    top: 68%;
+}
+
+.search-dynatable {
+    width: 50px;
+    font-size: 22px;
+}
+
+.search-box {
+    border: 1px solid #e0e0e0;  
+    margin-left: 25px;
+}
+
+.view-dynatable {
+    width: 50px;
+    font-size: 22px;
+}
+
+.date-news {
+    width: 100px;
+}
+
+.card-header a {
+    margin-top: 15px;
+}
+.card-header a i {
+    padding-top: 5px;
+}
+
+.pagination-dynatable {
+    display: block;
+    padding: 5px 0;
+    padding: 0 25px 0px;
+}
+
+.command-edit-news {
+    padding: 7px;
+    color: #4C4C4C;
+}
+
+.command-edit-news:hover, .command-edit-news:focus, .command-edit-news.focus {
+    color: #333333;
+    text-decoration: none;
+}
+
+.sidebar-block {
+    display: inline-block;
+    width: 100%;
+}
+
+.container-post {
+    margin: 0px -15px;
+}
+
+.sidebar-block .toggle-switch {
+    display: block;
+}
+    
+
+/*Button*/
+.radio-button {
+    float:left;
+}
+
+.radio-button label {
+    float:left;
+    background-color:#EFEFEF;
+}
+
+.radio-button label span {
+    text-align:center;
+    font-size: 13px;
+    display:block;
+    padding: 5px 25px;
+}
+
+.radio-button label input {
+    position:absolute;
+    visibility:hidden;
+}
+
+.radio-button input:checked + span {
+    padding: 0px;
+    padding: 5px 25px;
+    background-color:#4CAF50;
+    color: white;
+}
+
+.radio-button .btn {
+    padding: 0px;
+}
+
+/*PACE LOADING*/
+div.paceDiv {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   display: none;
+}
+
+/*POHON KEPUTUSAN*/
+.img-pohon-vertical {
+    height: 28px;
+    width: 1px;
+    margin-left: 27px;
+    margin-top: -28px;
+}
+
+.img-pohon-horizontal {
+    width: 45px;
+    height: 1px;
+}
+
+.img-pohon-arrow {
+    width: 16px;
+    height: 9px;
+    margin-left: -4px;
+}
+
+/*TABLE*/
+.table-responsive {
+    min-width: 100%;
+}
+
+/*VARIABLE VALUE*/
+.input_fields_wrap .fg-line {
+    max-width: 90%;
+    margin-right: 10px;
+}
+
