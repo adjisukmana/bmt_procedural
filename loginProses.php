@@ -14,7 +14,9 @@
 			# set session login
 			session_start();
 			
-			$_SESSION['username'] = $data["username"];
+			$_SESSION['username'] = $result["username"];
+			$_SESSION['nama_karyawan'] = $result["nama_karyawan"];
+			$_SESSION['photo_karyawan'] = $result["photo_karyawan"];
 			$_SESSION['userLogin'] = true;
 
 			header('location:index.php');
@@ -22,6 +24,6 @@
 			header('location:login.php?status=error');
 		}
 	}else{
-		header('location:login.php?status=error');
+		header('location:login.php?status=errors');
 	}
 ?>

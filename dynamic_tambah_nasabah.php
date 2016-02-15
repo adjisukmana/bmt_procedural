@@ -91,3 +91,96 @@
     <div class="clearfix"></div>
     </form>
 </div> <!-- card -->
+
+
+
+<div class="card">
+    <div class="card-header">
+        <h2>Import Data Anggota <small>Silahkan submit file .csv melalui tombol dibawah ini.</small></h2>
+    </div>
+
+    <!-- CONTENT -->
+    <form action='' method='post' enctype='multipart/form-data' name='form1' id='form1'>
+    <div class="row m-10">
+        <div class="col-sm-12"> 
+            <dl class="dl-horizontal">
+                <dt class="p-t-10">File</dt>
+                <dd>
+                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <span class="btn btn-primary btn-file m-r-10">
+                            <span class="fileinput-new">Select file</span>
+                            <span class="fileinput-exists">Change</span>
+                            <input type="file" name="csv">
+                        </span>
+                        <span class="fileinput-filename"></span>
+                        <a href="#" class="close fileinput-exists" data-dismiss="fileinput">&times;</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-icon-text btn-sm pull-right waves-effect" data-swal-success=""><i class="md md-done-all"></i> Submit</button>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    </form>
+
+    <?php if (@$_FILES["csv"]["size"] > 0) {
+
+                    //get the csv file
+                    $file = $_FILES["csv"]["tmp_name"];
+                    $handle = fopen($file,"r");
+                    // while (($line = fgetcsv($handle)) !== FALSE) {
+                      //$line is an array of the csv elements
+                      // echo "<pre>".print_r($line)."</pre>";
+                    // }
+                                    // if ($a==false) {
+                                    //     echo mysql_error();
+                                    //     die();
+                                    // } else {
+                                    //     echo "[berhasil]";
+                                    // }
+                    //loop through the csv file and insert into database
+                    mysql_query("DELETE FROM nasabah");
+                    mysql_query("DELETE FROM nasabah_variable");
+                    do {
+                        if (@$data[0]) {
+                            $a = mysql_query("INSERT INTO nasabah VALUES(
+                                    '".addslashes($data[0])."',
+                                    '".addslashes($data[1])."',
+                                    '".addslashes($data[2])."'
+                                )");
+                            $id = 1;
+                            $max_variable = addslashes($data[3]) + 3;
+                            for ($i=4; $i <= $max_variable; $i++) { 
+                                $sql1=mysql_query("SELECT * FROM variable_value");
+                                while ($data1=mysql_fetch_array($sql1)){
+                                    if ($data1['variable_value_alias']== addslashes($data[$i])) {
+                                // echo addslashes($data[$i])."/";
+                                        echo addslashes($data[0])."/".$id."/".$id_variable_value = $data1['id_variable_value']; 
+                                        mysql_query("INSERT INTO nasabah_variable VALUES
+                                            (
+                                                '".addslashes($data[0])."',
+                                                '".$id."',
+                                                '".$id_variable_value."'
+                                            )
+                                        ");
+                                     }
+                                }
+                                $id++;
+                            }
+                            // foreach ($_POST["variable_array"] as $id_variable =>$id_variable_value) {
+                            //     mysql_query("INSERT INTO nasabah_variable VALUES(
+                            //         '$_POST[id_nasabah]',
+                            //         '$id_variable',
+                            //         '$id_variable_value'
+                            //         )");
+                            // }
+                        }
+                    } while ($data = fgetcsv($handle,1000,";","'"));
+                    //
+
+                    //redirect
+                    // echo "<script>alert('Data csv berhasil diinput!'); document.location.href='index.php?p=dynamic_nasabah';</script>\n";
+
+                }
+                ?>
+</div> <!-- card -->

@@ -1,4 +1,16 @@
-<div class="row" ng-app="variableValue" ng-controller="MainCtrl">
+<?php 
+    $sql=mysql_query("SELECT *, v.id_variable as id_variable,
+                        v.variable_alias as variable_alias,
+                        v.variable_name as variable_name ,
+                        vv.variable_value_alias as variable_value_alias 
+                        FROM variable v 
+                        JOIN variable_value vv ON v.id_variable = vv.id_variable 
+                        WHERE v.id_variable = '$_GET[id_variable]'");
+    $data=mysql_fetch_array($sql);
+?>
+
+<div class="row" ng-app="variableValue">
+    <form method="POST" action='dynamic_aksi.php?module=dynamic_variable&act=input' ng-controller="MainCtrl">
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
@@ -6,7 +18,6 @@
             </div>
             <!-- CONTENT -->
             <div class="card-body card-padding">
-            <form method=POST action='dynamic_aksi.php?module=dynamic_variable&act=input' align='center'>
             <div class="row m-10">
                 <div class="col-sm-12"> 
                     <div class="pmbb-edit">
@@ -15,20 +26,9 @@
                             <dd>                  
                                 <div class="input-group">
                                     <div class="fg-line">
-                                        <input type="text" class="form-control" placeholder="Masukkan ID Variable ..." name='id_variable' value="<?php echo max_id('id_variable', 'variable');; ?>">
+                                        <input type="text" class="form-control" placeholder="Masukkan ID Variable ..." name='id_variable' value="<?php echo $data['id_variable']; ?>" readonly="readonly">
                                     </div>
                                     <span class="input-group-addon"><i class="md md-format-list-numbered"></i></span>
-                                </div>
-                            </dd>
-                        </dl>
-                        <dl class="dl-horizontal">
-                            <dt class="p-t-10">Nama Variable</dt>
-                            <dd>                  
-                                <div class="input-group">
-                                    <div class="fg-line">
-                                        <input type="text" class="form-control" placeholder="Masukkan Nama Variable ..." name='variable_name' value="{{ nama_variable  | lowercase | removeSpaces}}">
-                                    </div>
-                                    <span class="input-group-addon"><i class="md  md-person"></i></span>
                                 </div>
                             </dd>
                         </dl>
@@ -37,7 +37,18 @@
                             <dd>                  
                                 <div class="input-group">
                                     <div class="fg-line">
-                                        <input type="text" class="form-control" placeholder="Masukkan Alias Variable ..." name='variable_alias' ng-model="nama_variable" >
+                                        <input type="text" class="form-control" placeholder="Masukkan alias variable ..." name='variable_alias' ng-model="variable_alias" ng-change="change()" value="">
+                                    </div>
+                                    <span class="input-group-addon"><i class="md  md-person"></i></span>
+                                </div>
+                            </dd>
+                        </dl>
+                        <dl class="dl-horizontal">
+                            <dt class="p-t-10">Nama Variable</dt>
+                            <dd>                  
+                                <div class="input-group">
+                                    <div class="fg-line">
+                                        <input type="text" class="form-control" placeholder="Masukkan nama variable ..." name='variable_name' value="{{ variable_name  | lowercase | removeSpaces}}">
                                     </div>
                                     <span class="input-group-addon"><i class="md  md-person"></i></span>
                                 </div>
@@ -47,7 +58,6 @@
                 </div>
             </div>
             <div class="clearfix"></div>
-            </form>
             </div> <!-- card padding-->
         </div> <!-- card -->
     </div>
@@ -89,14 +99,24 @@
 
             <!-- CONTENT -->
             <div class="card-body card-padding">
-                <div class="row">
+                <div class="row" >
                     <div class="input_fields_wrap" ng-app="angularjs-starter" ng-controller="MainCtrl">
                     <table class="table table-responsive table-bordered table-striped">
                     <thead>
                         <tr>
-                            <td style="width:10px;">
+                            <td style="width:50px;">
                                 <dl class="">
                                     <dt class="p-t-10">No</dt>
+                                </dl>
+                            </td>
+                            <td style="width:50px;">
+                                <dl class="">
+                                    <dt class="p-t-10">Id</dt>
+                                </dl>
+                            </td>
+                            <td>
+                                <dl class="dl-horizontal fg-line">
+                                    <dt class="p-t-10">Nama Alias</dt>
                                 </dl>
                             </td>
                             <td>
@@ -109,31 +129,29 @@
                                     <dt class="p-t-10">Nama Variable</dt>
                                 </dl>
                             </td>
-                            <td>
-                                <dl class="dl-horizontal fg-line">
-                                    <dt class="p-t-10">Nama Alias</dt>
-                                </dl>
-                            </td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr data-ng-repeat="choice in choices">
                             <td>
-                                <h4>{{ no }}</h4>
+                               <p class="p-t-5"><strong>{{choice.no}}</strong></p>
+                            </td>
+                            <td>
+                                <input type="text" name='variable_array[]' class="form-control"  placeholder="Masukkan id variable ..." value="{{ choice.id_variable_value }}" readonly="readonly">
                             </td>
                             <td>
                                 <div class="fg-line">
-                                    <input type="text" name="" class="form-control"  placeholder="Enter mobile number" value="{{choice.name}}">
+                                    <input type="text" name="variable_value_alias[]" class="form-control" ng-model="choice.variable_value_alias_loop" placeholder="Masukkan alias ..." value="{{choice.variable_value_alias}}">
                                 </div>
                             </td>
                             <td>
                                 <div class="fg-line">
-                                    <input type="text" name="" class="form-control"  placeholder="Enter mobile number" value="{{choice.name | lowercase | removeSpaces}}">
+                                    <input type="text" name='variable_value_transformation[]' class="form-control"  placeholder="Masukkan transformasi data ..." value="{{choice.variable_value_alias_loop}}">
                                 </div>
                             </td>
                             <td>
                                 <div class="fg-line">
-                                    <input type="text" class="form-control" ng-model="choice.name" name="" placeholder="Enter mobile number">
+                                    <input type="text" name="variable_value_name[]" class="form-control"  placeholder="Masukkan nama variable value..." value="{{choice.variable_value_alias_loop | lowercase | removeSpaces}}">
                                 </div>
                             </td>
                             <td>
@@ -143,14 +161,14 @@
                     </tbody>
                     </table>
                        <span class="clearfix"></span>
-                       <button class="addfields btn btn-primary btn-icon-text btn-sm waves-effect m-t-10"  ng-click="addNewChoice()"><i class="md md-add"></i> Tambah</button>
+                       <a class="addfields btn btn-primary btn-icon-text btn-sm waves-effect m-t-10"  ng-click="addNewChoice()"><i class="md md-add"></i> Tambah</a>
                        <span class="clearfix"></span>
-                           
-                       <!-- <div id="choicesDisplay m-t-10">
-                          {{ choices }}
+                           <!-- 
+                       <div id="choicesDisplay m-t-10">
+                          {{ choices.id }}
                        </div> -->
                     </div>
-                    
+                    </form>
                 </div>
             </div> <!-- card-body card-padding -->
         </div> <!-- card -->
@@ -163,14 +181,43 @@ var app = angular.module('variableValue', []);
 
   app.controller('MainCtrl', function($scope) {
 
-  $scope.choices = [{id: 'choice1'}];
-  $scope.no = 1;
+  $scope.id_variable_value = <?php echo max_id('id_variable_value', 'variable_value'); ?>;
+  $scope.variable_alias = "<?php echo $data['variable_alias']; ?>";
+  $scope.variable_name = "<?php echo $data['variable_name']; ?>";
   
+  $scope.variable_value_alias = "<?php echo $data['variable_value_alias']; ?>";
+    $scope.change = function() {
+        $scope.variable_name = $scope.variable_alias;
+      };
+
+<?php 
+    $sql2=mysql_query("SELECT *, v.id_variable as id_variable,
+                        v.variable_alias as variable_alias,
+                        v.variable_name as variable_name ,
+                        vv.variable_value_alias as variable_value_alias,
+                        vv.id_variable_value as id_variable_value 
+                        FROM variable v 
+                        JOIN variable_value vv ON v.id_variable = vv.id_variable 
+                        WHERE v.id_variable = '$_GET[id_variable]'");
+    while($data2=mysql_fetch_array($sql2)) {
+    ?>
+    var nomor = 1;
+    $scope.choices = [{
+                        no: nomor, 
+                        id_variable_value: <?php echo $data2['id_variable_value']; ?>, 
+                        id: 'choice1'
+                    }];
+                    nomor++;
+    <?php } ?>        
+    
+
+
+
+
   $scope.addNewChoice = function() {
     var newItemNo = $scope.choices.length+1;
-    var No = $scope.no.length+1;
-    $scope.choices.push({'id':'choice'+newItemNo});
-    $scope.no.push(No);
+    var id_variable_value_plus = ++$scope.id_variable_value;
+    $scope.choices.push({'no': +newItemNo, 'id_variable_value': id_variable_value_plus, 'id':'choice'+newItemNo});
   };
     
   $scope.removeChoice = function() {

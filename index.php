@@ -1,3 +1,6 @@
+<?php session_start(); ?>
+<?php if($_SESSION['userLogin']){ ?>
+
 <?php 
     include "config/koneksi.php";
     include "function/helper.php";
@@ -188,3 +191,7 @@
 
     </body>
   </html>
+
+<?php } else { ?>
+    <?php header('location:login.php'); ?>
+<?php } ?>

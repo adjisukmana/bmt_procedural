@@ -3,11 +3,11 @@
                     <div class="profile-menu">
                         <a href="">
                             <div class="profile-pic">
-                                <img src="img/profile-pics/1.jpg" alt="">
+                                <img src="img_karyawan/<?php echo $_SESSION['photo_karyawan']; ?>" alt="">
                             </div>
 
                             <div class="profile-info">
-                                Adji Sukmana
+                                <?php echo $_SESSION['nama_karyawan']; ?>
 
                                 <i class="md md-arrow-drop-down"></i>
                             </div>
@@ -24,7 +24,7 @@
                                 <a href=""><i class="md md-settings"></i> Settings</a>
                             </li>
                             <li>
-                                <a href="login.php"><i class="md md-history"></i> Logout</a>
+                                <a href="logoutProses.php"><i class="md md-history"></i> Logout</a>
                             </li>
                         </ul>
                     </div>

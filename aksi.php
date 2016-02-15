@@ -15,13 +15,78 @@ function deleteAllDb()
 
 // session_start();
 include "config/koneksi.php";
-include "config/library.php";
 
 $module=$_GET['module'];
 $act=$_GET['act'];
 
 // hapus data Nasabah per item
-if ($module=='data_anggota' AND $act=='hapus_data_anggota'){
+if ($module=='pegawai') {
+
+    if ($act=='input') {  
+        $cek_username=mysql_num_rows(mysql_query("SELECT username FROM karyawan 
+                       WHERE username='$_POST[username]'"));
+        if ($cek_username>0){
+            echo "<script>window.alert('Username sudah ada. Ulangi lagi!');
+                window.location=('index.php?p=pegawai&id_karyawan=$_GET[id_karyawan]');</script>";
+        } else {
+        // Input Data Nasabah
+        $lokasi_img     = $_FILES['img']['tmp_name'];
+        $nama_img       = $_FILES['img']['name'];
+        move_uploaded_file($lokasi_img,"./img_karyawan/$nama_img");
+        $password = md5($_POST['password']);
+        mysql_query("INSERT INTO karyawan VALUES(
+            '$_POST[id_karyawan]',
+            '$_POST[nama_karyawan]',
+            '$nama_img',
+            '$_POST[username]',
+            '$password',
+            '$_POST[status_karyawan]'
+            )");
+        echo "<script>document.location.href='index.php?p=pegawai';</script>\n";
+        }
+
+    } elseif ($act=='edit') {
+    // Update Data Pegawai
+        $sql_cek_username = mysql_query("SELECT * FROM karyawan WHERE username='$_POST[username]'");
+        $cek_username = mysql_fetch_array($sql_cek_username);
+        if ((mysql_num_rows($sql_cek_username)>0) && ($cek_username['username']!=$_POST['username']) ){
+            echo "<script>window.alert('Username sudah ada. Ulangi lagi!');
+                window.location=('index.php?p=pegawai&id_karyawan=$_GET[id_karyawan]');</script>";
+        } else {
+
+        if (is_null($_POST['password'])) {
+            $password = $cek_username['password'];
+        } else {
+            $password = md5($_POST['password']);
+        }
+
+        $lokasi_img     = $_FILES['img']['tmp_name'];
+        if (!is_null($lokasi_img)) {
+            $nama_img       = $_FILES['img']['name'];
+            move_uploaded_file($lokasi_img,"./img_karyawan/$nama_img");
+        } else {
+            $nama_img       = $cek_username['photo_karyawan'];
+        }
+
+        mysql_query("UPDATE karyawan SET 
+            nama_karyawan = '$_POST[nama_karyawan]',
+            photo_karyawan = '$nama_img',
+            username = '$_POST[username]',
+            password = '$password',
+            status_karyawan = '$_POST[status_karyawan]'
+            WHERE id_karyawan = '$_POST[id_karyawan]'");
+        
+        echo "<script>document.location.href='index.php?p=pegawai';</script>\n";
+
+        }
+        
+    } elseif ($act=='delete') {
+    // hapus data Nasabah per item
+        mysql_query("DELETE FROM nasabah WHERE id_nasabah='$_GET[id_nasabah]'");
+        echo "<script>document.location.href='index.php?p=dynamic_nasabah';</script>\n";
+    }
+
+} elseif ($module=='data_anggota' AND $act=='hapus_data_anggota'){
     mysql_query("DELETE FROM data_anggota WHERE id='$_GET[id]'");
     echo "<script>alert('Data berhasil diinput!'); document.location.href='index.php?p=nasabah';</script>\n";
 }

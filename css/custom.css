@@ -160,3 +160,37 @@ div.paceDiv {
     margin-right: 10px;
 }
 
+/*TAB PANE BIODATA MAHASISWA*/
+.tab-pane .input-group {
+    width: 100% !important;
+}
+
+.tab-pane .input-group .fg-line p {
+    padding-top: 8px;
+    margin: 0px;
+}
+
+.tab-pane .photo img {
+    width: 100px;
+    height: 250px;
+}
+
+.tab-pane .fileinput {
+    padding-right: 0px;
+}
+
+@media (min-width: 768px) {
+  .dl-horizontal dt {
+    width: 130px;
+  }
+
+  .dl-horizontal dd {
+    margin-left: 150px;
+  }
+}
+
+#profile-main {
+    min-height: 0px;
+    padding: 0px;
+}
+

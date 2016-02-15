@@ -12,10 +12,8 @@
                     <th class="dynatable-head">No</th>
                     <th class="dynatable-head">ID</th>
                     <th class="dynatable-head">Nama</th>
-                    <th class="dynatable-head">Edit</th>
                     <th class="dynatable-head">Value</th>
-                    <th class="dynatable-head">Edits</th>
-                    <th class="dynatable-head">Delete</th>
+                    <th class="dynatable-head">Opsi</th>
                 	</tr>
                 </thead>
                 <tbody>
@@ -28,9 +26,6 @@
                   		<td><?php echo $no; ?></td>
                   		<td><?php echo $data['id_variable']; ?></td>
                   		<td><?php echo $data['variable_alias']; ?></td>
-                      <td>
-                          <a href="?p=dynamic_edit_variable&id_variable=<?php echo $data['id_variable']; ?>" class="btn bgm-orange waves-effect"><i class="md md-create"></i></a>
-                      </td>
                           <td>
                               <?php 
                               $sql1=mysql_query("SELECT vv.variable_value_alias as variable_value_alias,
@@ -46,12 +41,10 @@
                           </td>
                           <td>
                           <?php if(null_check('variable_value','id_variable',"$data[id_variable]")>0){; ?>
-                              <a href="?p=dynamic_edit_variable_value&id_variable=<?php echo $data['id_variable']; ?>" class="btn bgm-orange waves-effect"><i class="md md-create"></i></a>
+                              <a href="?p=dynamic_edit_variable&id_variable=<?php echo $data['id_variable']; ?>" class="btn bgm-orange waves-effect"><i class="md md-create"></i></a>
                               <?php } else { ?>
-                              <a href="?p=dynamic_tambah_variable_value&id_variable=<?php echo $data['id_variable']; ?>" class="btn bgm-cyan waves-effect"><i class="md md-add"></i></a>
+                              <a href="?p=dynamic_tambah_variable&id_variable=<?php echo $data['id_variable']; ?>" class="btn bgm-cyan waves-effect"><i class="md md-add"></i></a>
                               <?php } ?>
-                          </td>
-                          <td>
                               <a href='./dynamic_aksi.php?module=dynamic_variable&act=delete&id=<?php echo $data['id_variable']; ?>' class="btn btn-danger waves-effect"><i class="md md-close"></i></a>
                           </td>
                       </tr>
